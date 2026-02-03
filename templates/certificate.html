@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Certificate of Achievement</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/certificate.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+  <div id="certificate-section" class="certificate-wrapper">
+    <!-- OUTER PURPLE FRAME -->
+    <div class="outer-frame">
+      <!-- INNER GOLD FRAME -->
+      <div class="gold-frame">
+
+        <div class="certificate">
+
+          <!-- Watermark -->
+          <img src="{{ url_for('static', filename='images/institution_logo.png') }}" class="watermark">
+          <h1 class="head">GOVERNMENT COLLEGE OF ENGINEERING</h1>
+
+          <h3 class="title">Certificate of Completion</h3>
+          <p class="subtitle">This certificate is proudly presented to</p>
+
+          <h2 class="student-name">{{ session['name'] }}</h2>
+
+          <p class="description">
+            For successfully completing the
+            <span class="highlight">{{ subject | replace('_',' ') | title }}</span>
+            online examination with an overall score of
+            <span class="highlight">{{ session['score_data']['percentage'] }}%</span>.
+          </p>
+
+          <div class="info-row">
+            <div>
+              <p class="info-label">Registration No</p>
+              <p class="info-value">{{ session['reg_no'] }}</p>
+            </div>
+            <div>
+              <p class="info-label">Issued On</p>
+              <p class="info-value">{{ current_date }}</p>
+            </div>
+            <div>
+              <p class="info-label">Certificate ID</p>
+              <p class="info-value" id="certId"></p>
+            </div>
+          </div>
+
+          <div class="signature-section">
+            <div class="signature-box">
+              <img src="{{ url_for('static', filename='images/sign_exam_coordinator.png') }}">
+              <p class="sign-name">Exam Coordinator</p>
+            </div>
+
+            <div class="signature-box">
+              <img src="{{ url_for('static', filename='images/sign_director.png') }}">
+              <p class="sign-name">Director</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="download-area">
+    <button onclick="downloadPDF()">⬇ Download Certificate</button>
+  </div>
+
+  <script>
+    function generateCertId() {
+      const year = new Date().getFullYear();
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let rand = "";
+      for (let i = 0; i < 6; i++) {
+        rand += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return `SECEX-${year}-${rand}`;
+    }
+
+    const certId = generateCertId();
+    document.getElementById("certId").innerText = certId;
+
+    function downloadPDF() {
+      const element = document.getElementById('certificate-section');
+
+      html2pdf().set({
+        margin: 0.3,
+        filename: `certificate_${certId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2.8 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+      }).from(element).save();
+    }
+  </script>
+
+</body>
+
+</html>

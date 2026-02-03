@@ -1,0 +1,77 @@
+[
+  {
+    "question": "What is the output of print(type([]))?",
+    "options": ["<class 'list'>", "<type 'list'>", "<list>", "list"],
+    "answer": "<class 'list'>"
+  },
+  {
+    "question": "Which of the following is used to define a function in Python?",
+    "options": ["func", "define", "def", "function"],
+    "answer": "def"
+  },
+  {
+    "question": "What is the correct file extension for Python files?",
+    "options": [".pt", ".pyt", ".py", ".python"],
+    "answer": ".py"
+  },
+  {
+    "question": "Which keyword is used to create a class in Python?",
+    "options": ["class", "define", "struct", "object"],
+    "answer": "class"
+  },
+  {
+    "question": "What does the len() function do?",
+    "options": ["Returns the type", "Returns the last value", "Returns the length", "Returns the max value"],
+    "answer": "Returns the length"
+  },
+  {
+    "question": "What data type is the object below? \n x = {\"name\": \"John\", \"age\": 30}",
+    "options": ["Tuple", "List", "Set", "Dictionary"],
+    "answer": "Dictionary"
+  },
+  {
+    "question": "Which of the following is not a Python data type?",
+    "options": ["List", "Set", "Tuple", "Character"],
+    "answer": "Character"
+  },
+  {
+    "question": "What does the 'break' keyword do in loops?",
+    "options": ["Skips the current iteration", "Exits the loop", "Pauses the loop", "Continues loop"],
+    "answer": "Exits the loop"
+  },
+  {
+    "question": "Which function is used to get user input in Python 3?",
+    "options": ["scan()", "input()", "get()", "read()"],
+    "answer": "input()"
+  },
+  {
+    "question": "How do you insert COMMENTS in Python code?",
+    "options": ["// comment", "# comment", "-- comment", "/* comment */"],
+    "answer": "# comment"
+  },
+  {
+    "question": "Which of these is used for error handling in Python?",
+    "options": ["try-except", "do-catch", "try-catch", "handle-except"],
+    "answer": "try-except"
+  },
+  {
+    "question": "What is the output of: 2 ** 3?",
+    "options": ["6", "8", "9", "12"],
+    "answer": "8"
+  },
+  {
+    "question": "Which of the following is immutable in Python?",
+    "options": ["List", "Set", "Tuple", "Dictionary"],
+    "answer": "Tuple"
+  },
+  {
+    "question": "How can you convert a string to a number in Python?",
+    "options": ["int()", "str()", "float()", "parseInt()"],
+    "answer": "int()"
+  },
+  {
+    "question": "Which module in Python is used to generate random numbers?",
+    "options": ["random", "math", "os", "numbers"],
+    "answer": "random"
+  }
+]

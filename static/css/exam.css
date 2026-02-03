@@ -1,0 +1,135 @@
+/* ================= RESET ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= BODY ================= */
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: #1f2933;
+  padding: 20px;
+}
+
+/* ================= HEADER ================= */
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+/* ================= TIMER ================= */
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+  color: #dc2626;
+  padding: 6px 12px;
+  background: #fee2e2;
+  border-radius: 6px;
+}
+
+/* ================= EXAM CONTAINER ================= */
+#exam-form {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ================= QUESTIONS ================= */
+#exam-form p {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+#exam-form hr {
+  margin: 18px 0;
+  border: none;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+/* ================= OPTIONS ================= */
+label {
+  display: block;
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+label:hover {
+  background: #f1f5f9;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #2563eb;
+}
+
+/* ================= SUBMIT BUTTON ================= */
+button[type="submit"] {
+  display: block;
+  margin: 25px auto 0;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* ================= WEBCAM FEED ================= */
+video#webgazerVideoFeed {
+  position: fixed !important;
+  bottom: 12px !important;
+  right: 12px !important;
+  width: 200px !important;
+  height: 150px !important;
+  border-radius: 10px;
+  border: 2px solid #1e40af;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  z-index: 9999 !important;
+  pointer-events: none;
+}
+
+/* ================= HIDE WEBGAZER UI ================= */
+#webgazerFaceOverlay,
+#webgazerFaceFeedbackBox {
+  display: none !important;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  #exam-form {
+    padding: 20px;
+  }
+
+  video#webgazerVideoFeed {
+    width: 150px !important;
+    height: 110px !important;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}

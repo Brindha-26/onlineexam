@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+}
+
+.choose-wrapper {
+  padding: 40px;
+}
+
+.choose-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.exam-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+}
+
+.exam-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.exam-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.exam-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0077cc;
+  margin-bottom: 8px;
+}
+
+.exam-prof {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.exam-institute {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.exam-footer {
+  margin-top: auto;
+  padding: 0 20px 20px;
+}
+
+.exam-btn {
+  background: #2980b9;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.exam-btn:hover {
+  background: #216a94;
+}

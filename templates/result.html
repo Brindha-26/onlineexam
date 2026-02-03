@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Results</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+
+<body>
+  <div class="result-container">
+    <h2>Exam Results</h2>
+    <p><strong>Score:</strong> {{ score }}</p>
+    <p><strong>Percentage:</strong> {{ percentage }}%</p>
+    {% if percentage >= 50 %}
+    <ul>
+      {% for ans in answers %}
+      <li>
+        <b>{{ ans.question }}</b><br>
+        Your Answer: {{ ans.your_answer }}<br>
+        Correct Answer: {{ ans.correct_answer }}<br><br>
+      </li>
+      {% endfor %}
+    </ul>
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="{{ url_for('download_certificate') }}" class="download-btn">🎓 Download Certificate</a>
+    </div>
+    {% else %}
+    <div style="text-align: center; margin-top: 30px; color: red;">
+      <p>❌ Certificate not available (Minimum 50% required)</p>
+    </div>
+    {% endif %}
+    <div style="text-align:center; margin-top: 15px;">
+  <a href="{{ url_for('logout') }}" class="logout-btn">🚪 Logout</a>
+</div>
+
+  </div>
+</body>
+
+</html>

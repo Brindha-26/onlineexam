@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify OTP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/verify_otp.css') }}">
+</head>
+<body>
+  <div class="otp-container">
+    <h2>Enter the OTP sent to your email</h2>
+    
+    <form method="POST" onsubmit="return combineOTP()">
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+      </div>
+
+      <input type="hidden" name="otp" id="combined-otp">
+
+      <button type="submit">Verify</button>
+
+      <a href="{{ url_for('login') }}" class="back-button">Back</a>
+      
+      <div class="timer-text">
+        <span id="otp-timer">Resend available in 60s</span>
+      </div>
+
+      <button type="button" id="resendBtn" class="resend-btn" disabled onclick="resendOTP()">Resend OTP</button>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flash-message">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </form>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll(".otp-inputs input");
+    const resendBtn = document.getElementById("resendBtn");
+    const otpTimer = document.getElementById("otp-timer");
+
+    // OTP Autofill logic
+    inputs.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        if (input.value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" && input.value === "" && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    function combineOTP() {
+      let otp = "";
+      inputs.forEach(input => otp += input.value);
+      document.getElementById("combined-otp").value = otp;
+      return true;
+    }
+
+    // Auto-focus first input
+    window.onload = () => inputs[0].focus();
+
+    // OTP resend countdown
+    let timeLeft = 60;
+    function updateTimer() {
+      otpTimer.textContent = `Resend available in ${timeLeft--}s`;
+      if (timeLeft < 0) {
+        clearInterval(timerInterval);
+        resendBtn.disabled = false;
+        otpTimer.textContent = "Didn't receive OTP?";
+      }
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+
+    // Resend OTP logic
+    function resendOTP() {
+      resendBtn.disabled = true;
+      timeLeft = 60;
+      updateTimer();
+      setInterval(updateTimer, 1000);
+
+      fetch("/resend_otp", {
+        method: "POST"
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("🔁 OTP resent to your email.");
+        } else {
+          alert("⚠️ Failed to resend OTP.");
+        }
+      })
+      .catch(() => {
+        alert("⚠️ Error while resending OTP.");
+      });
+    }
+  </script>
+</body>
+</html>

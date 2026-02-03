@@ -1,0 +1,77 @@
+[
+  {
+    "question": "What is the primary goal of Artificial Intelligence?",
+    "options": ["To create expert systems", "To solve complex problems", "To simulate human intelligence", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "Which of the following is a type of machine learning?",
+    "options": ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "Which algorithm is used for classification problems?",
+    "options": ["K-Means", "K-Nearest Neighbors", "Apriori", "PageRank"],
+    "answer": "K-Nearest Neighbors"
+  },
+  {
+    "question": "What is a neural network inspired by?",
+    "options": ["Mathematics", "Human brain", "Computer architecture", "Decision trees"],
+    "answer": "Human brain"
+  },
+  {
+    "question": "Which language is most commonly used in AI programming?",
+    "options": ["C", "Python", "JavaScript", "PHP"],
+    "answer": "Python"
+  },
+  {
+    "question": "What is the full form of NLP in AI?",
+    "options": ["Neural Learning Process", "Natural Logic Programming", "Natural Language Processing", "None of these"],
+    "answer": "Natural Language Processing"
+  },
+  {
+    "question": "Which of these is an application of AI?",
+    "options": ["Speech recognition", "Spam filtering", "Autonomous vehicles", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "What is Deep Learning a subset of?",
+    "options": ["Machine Learning", "Reinforcement Learning", "Rule-based Systems", "Genetic Algorithms"],
+    "answer": "Machine Learning"
+  },
+  {
+    "question": "Which AI concept enables a system to learn from data?",
+    "options": ["Machine Learning", "Expert System", "Logic Programming", "Prolog"],
+    "answer": "Machine Learning"
+  },
+  {
+    "question": "Which algorithm is widely used for clustering?",
+    "options": ["K-Means", "Naive Bayes", "SVM", "Decision Trees"],
+    "answer": "K-Means"
+  },
+  {
+    "question": "Which of these is not a type of AI?",
+    "options": ["Weak AI", "Strong AI", "General AI", "Medium AI"],
+    "answer": "Medium AI"
+  },
+  {
+    "question": "In which AI domain is AlphaGo an example?",
+    "options": ["Expert Systems", "Game Playing", "Natural Language Processing", "Robotics"],
+    "answer": "Game Playing"
+  },
+  {
+    "question": "Which of the following is an AI framework?",
+    "options": ["TensorFlow", "NumPy", "Pandas", "Matplotlib"],
+    "answer": "TensorFlow"
+  },
+  {
+    "question": "What is backpropagation used for?",
+    "options": ["Data collection", "Neural network training", "Feature selection", "Clustering"],
+    "answer": "Neural network training"
+  },
+  {
+    "question": "Which of the following AI techniques mimics natural evolution?",
+    "options": ["Genetic Algorithm", "Neural Networks", "Rule-based systems", "Linear Regression"],
+    "answer": "Genetic Algorithm"
+  }
+]

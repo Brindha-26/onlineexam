@@ -1,0 +1,77 @@
+[
+  {
+    "question": "What does the acronym 'VPN' stand for?",
+    "options": ["Virtual Private Network", "Virtual Protected Network", "Verified Private Node", "Virtual Processing Network"],
+    "answer": "Virtual Private Network"
+  },
+  {
+    "question": "Which of the following is a common form of cyberattack?",
+    "options": ["Phishing", "Smishing", "DDoS", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "What is the purpose of a firewall?",
+    "options": ["To provide internet access", "To block spam", "To prevent unauthorized access", "To monitor employee activity"],
+    "answer": "To prevent unauthorized access"
+  },
+  {
+    "question": "Which type of malware demands payment to regain access to data?",
+    "options": ["Virus", "Trojan", "Spyware", "Ransomware"],
+    "answer": "Ransomware"
+  },
+  {
+    "question": "What does HTTPS stand for?",
+    "options": ["Hyper Text Transfer Protocol Secure", "Hyper Tool Transfer Protocol Secure", "Hyperlink Transfer Protocol Service", "Host Text Transfer Protocol Secure"],
+    "answer": "Hyper Text Transfer Protocol Secure"
+  },
+  {
+    "question": "Which of these is used for encryption?",
+    "options": ["AES", "SSL", "RSA", "All of the above"],
+    "answer": "All of the above"
+  },
+  {
+    "question": "What is two-factor authentication (2FA)?",
+    "options": ["Two passwords", "Password and CAPTCHA", "Two-step user verification", "Two user accounts"],
+    "answer": "Two-step user verification"
+  },
+  {
+    "question": "Which of the following is an example of biometric authentication?",
+    "options": ["PIN", "Password", "Fingerprint", "Username"],
+    "answer": "Fingerprint"
+  },
+  {
+    "question": "What does malware stand for?",
+    "options": ["Malfunctioned software", "Malicious software", "Masked software", "Managed software"],
+    "answer": "Malicious software"
+  },
+  {
+    "question": "Which of the following helps detect intrusions?",
+    "options": ["Firewall", "IDS", "Router", "Switch"],
+    "answer": "IDS"
+  },
+  {
+    "question": "Which of the following is a strong password?",
+    "options": ["123456", "password", "Brindha@123", "abcdefg"],
+    "answer": "Brindha@123"
+  },
+  {
+    "question": "What is phishing?",
+    "options": ["Hacking servers", "Sending fake emails to steal information", "Scanning files", "Encrypting data"],
+    "answer": "Sending fake emails to steal information"
+  },
+  {
+    "question": "Which port does HTTPS typically use?",
+    "options": ["21", "25", "80", "443"],
+    "answer": "443"
+  },
+  {
+    "question": "What is the main purpose of cybersecurity?",
+    "options": ["To update software", "To train users", "To protect systems and data", "To install antivirus"],
+    "answer": "To protect systems and data"
+  },
+  {
+    "question": "Which is considered a physical security method?",
+    "options": ["Firewall", "Fingerprint scanner", "Antivirus", "SSL certificate"],
+    "answer": "Fingerprint scanner"
+  }
+]

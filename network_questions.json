@@ -1,0 +1,77 @@
+[
+  {
+    "question": "What does IP stand for?",
+    "options": ["Internet Protocol", "Internal Program", "Interface Port", "Internet Package"],
+    "answer": "Internet Protocol"
+  },
+  {
+    "question": "Which protocol is used to send emails?",
+    "options": ["HTTP", "FTP", "SMTP", "IMAP"],
+    "answer": "SMTP"
+  },
+  {
+    "question": "What is the default port number for HTTP?",
+    "options": ["80", "21", "25", "443"],
+    "answer": "80"
+  },
+  {
+    "question": "Which device connects multiple networks together?",
+    "options": ["Hub", "Switch", "Router", "Bridge"],
+    "answer": "Router"
+  },
+  {
+    "question": "What is the maximum length of an IPv4 address in decimal dotted format?",
+    "options": ["12", "15", "10", "32"],
+    "answer": "15"
+  },
+  {
+    "question": "What protocol is used to securely browse websites?",
+    "options": ["HTTP", "FTP", "HTTPS", "TELNET"],
+    "answer": "HTTPS"
+  },
+  {
+    "question": "Which layer in the OSI model is responsible for routing?",
+    "options": ["Data Link", "Network", "Transport", "Application"],
+    "answer": "Network"
+  },
+  {
+    "question": "Which address is used to identify a device on a local network?",
+    "options": ["IP Address", "MAC Address", "URL", "Gateway Address"],
+    "answer": "MAC Address"
+  },
+  {
+    "question": "What is the purpose of DNS?",
+    "options": ["To block access to certain websites", "To transfer files", "To translate domain names to IP addresses", "To encrypt internet traffic"],
+    "answer": "To translate domain names to IP addresses"
+  },
+  {
+    "question": "Which protocol is used for file transfer?",
+    "options": ["SMTP", "FTP", "DNS", "ICMP"],
+    "answer": "FTP"
+  },
+  {
+    "question": "What is the full form of LAN?",
+    "options": ["Large Area Network", "Local Access Network", "Local Area Network", "Logical Area Network"],
+    "answer": "Local Area Network"
+  },
+  {
+    "question": "Which tool is used to test the reachability of a host?",
+    "options": ["nslookup", "ipconfig", "ping", "netstat"],
+    "answer": "ping"
+  },
+  {
+    "question": "Which of the following IP addresses is private?",
+    "options": ["8.8.8.8", "192.168.1.1", "172.32.0.1", "1.1.1.1"],
+    "answer": "192.168.1.1"
+  },
+  {
+    "question": "Which command displays current TCP/IP network configuration?",
+    "options": ["ping", "netstat", "ipconfig", "nslookup"],
+    "answer": "ipconfig"
+  },
+  {
+    "question": "Which layer in the OSI model is responsible for end-to-end communication?",
+    "options": ["Data Link", "Network", "Transport", "Presentation"],
+    "answer": "Transport"
+  }
+]

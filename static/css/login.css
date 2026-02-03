@@ -1,0 +1,79 @@
+/* login.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: url('../images/background.jpg') no-repeat center center fixed;
+  background-size: cover; 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.2);  /* Semi-transparent box */
+  backdrop-filter: blur(10px);          /* Glassmorphism */
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Input Fields */
+form input[type="text"],
+form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #050000;
+}
+
+form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+form input:focus {
+  outline: none;
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Button */
+form button {
+  width: 100%;
+  background-color: #2980b9;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background-color: #2573a6;
+}
+
+/* Flash message styling */
+.flash-message {
+  color: #ffdddd;
+  background-color: rgba(255, 0, 0, 0.3);
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 15px;
+}

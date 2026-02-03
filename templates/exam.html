@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Secure Online Examination</title>
+
+  <!-- FaceAPI -->
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      text-align: center;
+    }
+
+    #exam-form {
+      display: none;
+      max-width: 850px;
+      margin: 25px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      padding: 6px 10px;
+      margin: 6px 0;
+      cursor: pointer;
+    }
+
+    #cameraBox {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 320px;
+      height: 240px;
+      border: 3px solid #2563eb;
+      border-radius: 8px;
+      background: black;
+      z-index: 9999;
+    }
+
+    #faceVideo {
+      width: 320px;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    #faceCanvas {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      z-index: 10000;
+      pointer-events: none;
+    }
+
+    #status {
+      position: fixed;
+      bottom: 260px;
+      right: 10px;
+      padding: 8px 12px;
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 14px;
+      border-radius: 6px;
+      z-index: 10001;
+    }
+  </style>
+</head>
+
+<body oncontextmenu="return false">
+
+  <h2>Secure Online Examination</h2>
+  <p><b>Time Remaining:</b> <span id="timer">15:00</span></p>
+
+  <div id="cameraBox">
+    <video id="faceVideo" autoplay muted playsinline></video>
+  </div>
+  <canvas id="faceCanvas"></canvas>
+  <div id="status">[SYSTEM] Initializing…</div>
+
+  <form method="post" action="{{ url_for('submit_exam') }}" id="exam-form">
+    {% for question in questions %}
+    <p><b>Q{{ loop.index }}. {{ question.question }}</b></p>
+    {% for opt in question.options %}
+    <label>
+      <input type="radio" name="q{{ question.id }}" value="{{ opt }}">
+      {{ opt }}
+    </label>
+    {% endfor %}
+    <hr>
+    {% endfor %}
+    <input type="hidden" name="tab_switches" id="tab-switch-count" value="0">
+    <button type="submit">Submit Exam</button>
+  </form>
+
+  <script>
+    /* ================= GLOBAL ================= */
+    let timeLeft = 15 * 60;
+    let tabSwitchCount = 0;
+    let eyeAwayStart = null;
+    let noiseWarnings = 0;
+    let noiseCooldown = false;
+
+    const MAX_EYE_AWAY_TIME = 1;     // seconds
+    const MAX_NOISE_WARNINGS = 0.02;
+    const MAX_BAD_FRAMES = 30; // Grace period buffers
+    let noFaceFrames = 0;
+    let multiFaceFrames = 0;
+
+    /* ================= VIOLATIONS ================= */
+    function addViolation(msg) {
+      console.warn("Violation:", msg);
+      const status = document.getElementById("status");
+      if (status) {
+        status.innerText = "[VIOLATION] " + msg;
+        status.style.color = "yellow";
+      }
+    }
+
+    /* ================= TERMINATE ================= */
+    function terminate(reason) {
+      alert("❌ " + reason);
+      document.getElementById("exam-form").submit();
+    }
+
+    /* ================= TIMER ================= */
+    setInterval(() => {
+      const m = Math.floor(timeLeft / 60);
+      const s = timeLeft % 60;
+      document.getElementById("timer").innerText =
+        `${m}:${s < 10 ? "0" : ""}${s}`;
+      timeLeft--;
+      if (timeLeft < 0) terminate("Time up");
+    }, 1000);
+
+    /* ================= FULLSCREEN ================= */
+    function forceFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => { });
+      }
+    }
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) terminate("Fullscreen exited");
+    });
+
+    /* ================= TAB SWITCH ================= */
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        tabSwitchCount++;
+        document.getElementById("tab-switch-count").value = tabSwitchCount;
+        terminate("Tab switch detected");
+      }
+    });
+
+    /* ================= FACE + EYE TRACKING ================= */
+    async function startFaceMonitoring() {
+
+      const video = document.getElementById("faceVideo");
+      const canvas = document.getElementById("faceCanvas");
+      const status = document.getElementById("status");
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { width: 640, height: 480, facingMode: "user" }
+      });
+
+      video.srcObject = stream;
+      await video.play();
+
+      await faceapi.nets.ssdMobilenetv1.loadFromUri(
+        "https://justadudewhohacks.github.io/face-api.js/models"
+      );
+      await faceapi.nets.faceLandmark68Net.loadFromUri(
+        "https://justadudewhohacks.github.io/face-api.js/models"
+      );
+
+      video.width = 320;
+      video.height = 240;
+      canvas.width = 320;
+      canvas.height = 240;
+      faceapi.matchDimensions(canvas, { width: 320, height: 240 });
+
+      status.innerText = "[SYSTEM] Vision online";
+
+      setInterval(async () => {
+
+        const detections = await faceapi
+          .detectAllFaces(video, new faceapi.SsdMobilenetv1Options({ minConfidence: 0.4 }))
+          .withFaceLandmarks();
+
+        const resized = faceapi.resizeResults(detections, { width: 320, height: 240 });
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, 320, 240);
+        faceapi.draw.drawDetections(canvas, resized);
+        faceapi.draw.drawFaceLandmarks(canvas, resized);
+
+        status.innerText = `[VISION] Faces: ${detections.length}`;
+
+        /* ---- Multiple Face ---- */
+        if (detections.length > 1) {
+          multiFaceFrames++;
+          status.innerText = `[WARNING] Multiple faces! ${multiFaceFrames}/${MAX_BAD_FRAMES}`;
+          status.style.color = "orange";
+          if (multiFaceFrames > MAX_BAD_FRAMES) {
+            terminate("Multiple faces detected");
+          }
+        } else {
+          multiFaceFrames = 0;
+        }
+
+        /* ---- No Face ---- */
+        if (detections.length === 0) {
+          noFaceFrames++;
+          status.innerText = `[WARNING] Face not found! ${noFaceFrames}/${MAX_BAD_FRAMES}`;
+          status.style.color = "red";
+          if (noFaceFrames > MAX_BAD_FRAMES) {
+            terminate("No face detected");
+          }
+        } else {
+          noFaceFrames = 0;
+          if (detections.length === 1) status.style.color = "#00ff00"; // Reset color on success
+        }
+
+        /* ---- Eye / Head Direction ---- */
+        if (detections.length === 1) {
+          const lm = detections[0].landmarks;
+          const leftEye = lm.getLeftEye();
+          const rightEye = lm.getRightEye();
+          const nose = lm.getNose();
+
+          const eyeCenterX = (leftEye[0].x + rightEye[3].x) / 2;
+          const noseX = nose[3].x;
+
+          if (Math.abs(eyeCenterX - noseX) > 35) {
+            if (!eyeAwayStart) eyeAwayStart = Date.now();
+            else if ((Date.now() - eyeAwayStart) / 1000 > MAX_EYE_AWAY_TIME) {
+              terminate("Not looking at screen");
+            }
+          } else {
+            eyeAwayStart = null;
+          }
+        }
+
+      }, 400);
+    }
+    /* ================= DISABLE KEYS ================= */
+    document.addEventListener("keydown", e => {
+      if (e.ctrlKey || e.altKey || e.metaKey) {
+        e.preventDefault();
+        addViolation("Restricted key usage!");
+      }
+    });
+    /* ================= NOISE DETECTION ================= */
+    const MAX_WARNINGS = 3;
+    let analyser, audioCtx;
+
+    async function startNoiseDetection() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // 🔥 FIX: Resume AudioContext
+        if (audioCtx.state === "suspended") {
+          await audioCtx.resume();
+        }
+
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+
+        const mic = audioCtx.createMediaStreamSource(stream);
+        mic.connect(analyser);
+
+        const buffer = new Uint8Array(analyser.fftSize);
+
+        setInterval(() => {
+          if (noiseCooldown) return;
+
+          analyser.getByteTimeDomainData(buffer);
+
+          let sum = 0;
+          for (let i = 0; i < buffer.length; i++) {
+            const val = (buffer[i] - 128) / 128;
+            sum += val * val;
+          }
+
+          const rms = Math.sqrt(sum / buffer.length);
+
+          console.log("RMS:", rms); // 👈 DEBUG
+
+          if (rms > 0.08) { // VERY SENSITIVE
+            noiseWarnings++;
+            noiseCooldown = true;
+
+            if (noiseWarnings < MAX_WARNINGS) {
+              alert(`🔊 Noise detected! Warning ${noiseWarnings}/3`);
+            } else {
+              alert("❌ Noise detected 3 times. Exam terminated.");
+              document.getElementById("exam-form").submit();
+            }
+
+            setTimeout(() => noiseCooldown = false, 3000);
+          }
+        }, 200);
+
+      } catch (err) {
+        alert("Microphone access denied!");
+        console.error(err);
+      }
+    }
+
+
+
+    /* ================= START ================= */
+    window.onload = async () => {
+      document.getElementById("exam-form").style.display = "block";
+      forceFullscreen();
+      startFaceMonitoring();
+      startNoiseDetection();
+    };
+  </script>
+
+</body>
+
+</html>

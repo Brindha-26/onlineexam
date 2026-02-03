@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+</head>
+
+<body>
+
+    <div class="results-container">
+        <h2>Student Examination Results</h2>
+
+        <a href="/dashboard" class="back-link">Back to Dashboard</a>
+
+        {% for subject, results in grouped_data.items() %}
+        <div class="subject-section">
+            <h3 class="subject-title">{{ subject.replace('_', ' ').upper() }}</h3>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Reg No</th>
+                        <th>Student Name</th>
+                        <th>Score</th>
+                        <th>Percentage</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in results %}
+                    <tr>
+                        <td>{{ row.reg_no }}</td>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.score }}</td>
+                        <td>{{ row.percentage }}%</td>
+                        <td>{{ row.exam_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="no-results">No results found yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

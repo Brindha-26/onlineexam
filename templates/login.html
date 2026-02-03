@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - Secure Exam</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    
+    <form method="post">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="text" name="reg_no" placeholder="Register Number" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <button type="submit">Send OTP</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+[
+  {
+    "question": "Which data structure uses LIFO (Last In First Out)?",
+    "options": ["Queue", "Stack", "Array", "Linked List"],
+    "answer": "Stack"
+  },
+  {
+    "question": "Which data structure is used in BFS (Breadth-First Search)?",
+    "options": ["Stack", "Queue", "Tree", "Graph"],
+    "answer": "Queue"
+  },
+  {
+    "question": "Which of the following is a linear data structure?",
+    "options": ["Binary Tree", "Queue", "Graph", "Hash Table"],
+    "answer": "Queue"
+  },
+  {
+    "question": "In a circular queue, the condition for 'Queue Full' is:",
+    "options": ["front == rear", "(rear + 1) % size == front", "rear == size", "front == -1"],
+    "answer": "(rear + 1) % size == front"
+  },
+  {
+    "question": "Which data structure provides fast lookup using keys?",
+    "options": ["Array", "Stack", "Hash Table", "Linked List"],
+    "answer": "Hash Table"
+  },
+  {
+    "question": "Which traversal gives sorted output in Binary Search Tree?",
+    "options": ["Inorder", "Preorder", "Postorder", "Level order"],
+    "answer": "Inorder"
+  },
+  {
+    "question": "Which is not a type of Linked List?",
+    "options": ["Single", "Double", "Circular", "Binary"],
+    "answer": "Binary"
+  },
+  {
+    "question": "Which sorting algorithm has the best average case time complexity?",
+    "options": ["Bubble Sort", "Merge Sort", "Selection Sort", "Insertion Sort"],
+    "answer": "Merge Sort"
+  },
+  {
+    "question": "Which data structure is used in recursion?",
+    "options": ["Queue", "Stack", "Array", "Tree"],
+    "answer": "Stack"
+  },
+  {
+    "question": "What is the time complexity of searching in a balanced binary search tree?",
+    "options": ["O(n)", "O(log n)", "O(1)", "O(n log n)"],
+    "answer": "O(log n)"
+  },
+  {
+    "question": "Which operation is faster in Doubly Linked List compared to Singly Linked List?",
+    "options": ["Insertion at head", "Traversal", "Deletion of last node", "None of the above"],
+    "answer": "Deletion of last node"
+  },
+  {
+    "question": "Which of the following is not a stable sorting algorithm?",
+    "options": ["Merge Sort", "Bubble Sort", "Selection Sort", "Insertion Sort"],
+    "answer": "Selection Sort"
+  },
+  {
+    "question": "A complete binary tree has:",
+    "options": ["All levels completely filled", "All levels except last completely filled and left aligned", "Only root node", "All nodes have 2 children"],
+    "answer": "All levels except last completely filled and left aligned"
+  },
+  {
+    "question": "In a max heap, the largest element is:",
+    "options": ["At the root", "At the leaf", "In the middle", "At the last level"],
+    "answer": "At the root"
+  },
+  {
+    "question": "Which traversal is used to delete the tree?",
+    "options": ["Preorder", "Inorder", "Postorder", "Level Order"],
+    "answer": "Postorder"
+  }
+]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Choose Exam</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/choose_exam.css') }}">
+</head>
+
+<body>
+    <div class="choose-wrapper">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning"
+            style="color: red; background: #ffe6e6; padding: 10px; margin-bottom: 20px; border-radius: 5px;">{{ message
+            }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <h2 class="choose-title">Choose the Exam You Want to Attend</h2>
+        <div class="exam-grid">
+            {% for exam in exams %}
+            <form method="POST">
+                <div class="exam-card">
+                    <img src="{{ url_for('static', filename='images/' + exam.image) }}" alt="{{ exam.title }}">
+                    <div class="exam-content">
+                        <div class="exam-title">{{ exam.title }}</div>
+                        <div class="exam-prof">{{ exam.prof }}</div>
+                        <div class="exam-institute">{{ exam.institute }}</div>
+                    </div>
+                    <div class="exam-footer">
+                        <input type="hidden" name="exam_choice" value="{{ exam.id }}">
+                        <button type="submit" class="exam-btn">Start Exam</button>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+  <div class="dashboard-container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning"
+      style="color: red; background: #ffe6e6; padding: 10px; margin-bottom: 20px; border-radius: 5px;">{{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <h2>Welcome to the Secure Exam System</h2>
+    <div class="instructions">
+      <strong>Instructions:</strong>
+      <ul>
+        <li>Do not refresh or close the window during the exam.</li>
+        <li>You will have 15 minutes to complete the exam.</li>
+        <li>Click “Start Exam” only when you're ready.</li>
+      </ul>
+    </div>
+    <form action="{{ url_for('exam') }}" method="POST">
+      <div style="text-align: left; margin-bottom: 20px; color: #eee;">
+        <label style="cursor: pointer; display: flex; align-items: flex-start; gap: 10px;">
+          <input type="checkbox" name="agree" required style="margin-top: 4px;">
+          <span>I have read all the instructions and I agree to follow the rules of the secure examination. I understand
+            that any violation will result in immediate termination.</span>
+        </label>
+      </div>
+      <button class="start-button" type="submit">I Agree & Start Exam</button>
+    </form>
+    <a href="{{ url_for('choose_exam') }}" class="back-button">Back</a>
+  </div>
+</body>
+
+</html>

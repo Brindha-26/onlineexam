@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  background: #f1f5f9;
+  font-family: "Georgia", serif;
+}
+
+.certificate-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.certificate {
+  position: relative;
+  width: 1000px;
+  padding: 80px 100px;
+  background: #ffffff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+/* Modern wave */
+.certificate::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -300px;
+  width: 500px;
+  height: 160%;
+  background: linear-gradient(135deg, #facc15, #ca8a04);
+  border-radius: 50%;
+}
+
+.certificate::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -260px;
+  width: 450px;
+  height: 160%;
+  background: linear-gradient(135deg, #6b21a8, #9333ea);
+  border-radius: 50%;
+}
+
+/* Watermark */
+.watermark {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  width: 180px;
+  transform: translate(-50%, -50%);
+  opacity: 12;
+}
+
+/* Content on top */
+.certificate * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   OUTER PURPLE FRAME
+========================================================= */
+.outer-frame {
+  background: #5b0f91;
+  padding: 5px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   GOLD INNER FRAME
+========================================================= */
+.gold-frame {
+  background: linear-gradient(135deg, #facc15, #ca8a04);
+  padding: 2px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.head {
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Algerian';
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 22px;
+  color: #060606;
+  margin-bottom: 35px;
+}
+
+.student-name {
+  text-align: center;
+  font-size: 46px;
+  font-family: 'Lucida Calligraphy';
+  margin: 25px 0;
+  color: #260ae0;
+}
+
+.description {
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 30px 80px;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #6b21a8;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 55px 0;
+  padding: 0 80px;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #0b0b0c;
+  text-transform: uppercase;
+}
+
+.info-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.signature-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60px;
+  padding: 0 80px;
+}
+
+.signature-box img {
+  width: 110px;
+}
+
+.sign-name {
+  margin-top: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.download-area {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.download-area button {
+  padding: 12px 32px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #6b21a8, #9333ea);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

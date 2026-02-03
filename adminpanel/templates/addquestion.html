@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addquestion.css') }}">
+</head>
+
+<body>
+
+<div class="upload-box">
+
+    <h2>Upload Questions (JSON)</h2>
+
+    <!-- ✅ FLASH MESSAGE DISPLAY -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".json" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <a href="/dashboard">Back</a>
+
+</div>
+
+</body>
+</html>
