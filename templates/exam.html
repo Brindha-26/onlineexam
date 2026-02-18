@@ -167,12 +167,24 @@
       const canvas = document.getElementById("faceCanvas");
       const status = document.getElementById("status");
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: 640, height: 480, facingMode: "user" }
-      });
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { width: 640, height: 480, facingMode: "user" }
+        });
 
-      video.srcObject = stream;
-      await video.play();
+        video.srcObject = stream;
+        await video.play();
+
+        // Show exam form only after camera success
+        document.getElementById("exam-form").style.display = "block";
+        forceFullscreen();
+      } catch (err) {
+        console.error("Camera error:", err);
+        status.innerText = "[ERROR] Camera access denied!";
+        status.style.color = "red";
+        alert("❌ Camera access is required to take the exam. Please allow camera access and reload.");
+        return;
+      }
 
       await faceapi.nets.ssdMobilenetv1.loadFromUri(
         "https://justadudewhohacks.github.io/face-api.js/models"
@@ -320,8 +332,7 @@
 
     /* ================= START ================= */
     window.onload = async () => {
-      document.getElementById("exam-form").style.display = "block";
-      forceFullscreen();
+      // document.getElementById("exam-form").style.display = "block"; // Moved to startFaceMonitoring
       startFaceMonitoring();
       startNoiseDetection();
     };
