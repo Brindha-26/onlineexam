@@ -37,8 +37,8 @@ def generate_alphanumeric_otp(length=6):
 
 # ---------------- send otp ----------------
 def send_otp_email(receiver_email, otp):
-    sender_email = "brindham2608@gmail.com"
-    app_password = "wptdrukdzlkokagp"
+    sender_email = "your mail id"
+    app_password = "your app password"
 
     msg = EmailMessage()
     msg.set_content(f"Your OTP for login is: {otp}")
